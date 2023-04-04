@@ -51,15 +51,16 @@ GetLeapYearCheck(yearToCheck);
 
 scanner.close();
 }
+
+
 private static void GetLeapYearCheck(int yearToCheck) 
 {
-  if(yearToCheck % 400 != 0||yearToCheck % 4 != 0||(yearToCheck % 100 != 0 && yearToCheck % 400 != 0))
+  if(yearToCheck % 4 != 0||yearToCheck % 400 != 0||(yearToCheck % 100 != 0 && yearToCheck % 400 != 0))
   {
-    System.out.println(yearToCheck+" Is not a Leap Year");
-    
+    System.out.println(yearToCheck+" Is not a Leap Year");   
   }   
   else
-  System.out.println(yearToCheck+" Is a Leap Year");
+    System.out.println(yearToCheck+" Is a Leap Year");
 }
 private static void GetWholeNumber(double numberToConvert) 
 {
