@@ -1,0 +1,4 @@
+package EnemyProblem;
+public interface ISkeletonAbilities{
+    void UseAbility();
+}

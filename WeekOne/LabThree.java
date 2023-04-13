@@ -6,10 +6,11 @@ public class LabThree
 {
     public static void main(String[] args)
     {
+        //Bonus: Make a big, beautiful Menu, using a Switch Case and a Do While or a While loop that will allow a user 
+       //to access each method, depending on the number selected. Allow for the program to repeat and quit when requested. 
         Scanner scan = new Scanner(System.in);       
         int choice;
-       //Bonus: Make a big, beautiful Menu, using a Switch Case and a Do While or a While loop that will allow a user 
-       //to access each method, depending on the number selected. Allow for the program to repeat and quit when requested. 
+        
        do{
          
        System.out.println("enter the following numbers to access each method:");
@@ -29,11 +30,11 @@ public class LabThree
                 char ch = 'a';
                 char secondCh = 'A';
                 String output = RemoveCharacter(input, ch, secondCh);
-                System.out.println("Your new word is: " + output);  
+                System.out.println("Your new word is: " + output); 
                 break;
             case 1:            
                 //2. Write a method to remove duplicate characters from a string.
-                String word = "Hello";
+                String word = "Hello Hello a";
                 String newWord = RemoveDuplicate(word);
                 System.out.println("Your new word is: " + newWord);  
                 break;
@@ -54,11 +55,9 @@ public class LabThree
                 System.out.println("Thank you for coming");              
                 break;
             default:
-                System.out.println("Invalid input");
-          
+                System.out.println("Invalid input");          
           }
-       }while(choice != 4);
-       
+       }while(choice != 4);       
        scan.close(); 
     }
 
@@ -100,14 +99,18 @@ public class LabThree
 
     private static String RemoveDuplicate(String word) 
     {      
-            String result = "";
-            for (int i = 0; i < word.length(); i++) {
-                char c = word.charAt(i);
-                if (result.indexOf(c) < 0) {
-                    result += c;
-                }
+        int[] charCount = new int[256];
+        for (int i = 0; i < word.length(); i++) {
+            charCount[word.charAt(i)]++;
+        }
+
+        String result = "";
+       
+        for (int i = 0; i < word.length(); i++) {
+            if (charCount[word.charAt(i)] == 1) {
+                result += word.charAt(i);
             }
-            return result;        
+        }  return result;        
     }
 
     public static String RemoveCharacter(String str, char ch, char secondCh) 

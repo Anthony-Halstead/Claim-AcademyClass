@@ -1,0 +1,5 @@
+package EnemyProblem;
+public interface IMagicAbilities{
+    UseSpell();
+    int magic;
+}
