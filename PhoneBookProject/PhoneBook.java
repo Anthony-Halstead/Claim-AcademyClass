@@ -58,7 +58,10 @@ public class PhoneBook{
     {
         System.out.println("To search for a person by phone number follow the following instructions ");        
         System.out.println("Enter phone number: ");
-        long phoneNumber = scn.nextLong();
+        String phoneNumber = scn.next();
+        if(phoneNumber.length() == 10){
+            phoneNumber = "("+phoneNumber.substring(0, 3) + ")" + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6, 10);
+        }    
         for(Person person : contacts)
         {
             if(person.getPhoneNumber().equals(phoneNumber))
@@ -88,25 +91,22 @@ public class PhoneBook{
     {
         System.out.println("*************************************************************");
         System.out.println("To add a contact to the phone book follow the following instructions ");        
-        System.out.println("Create an address to assign to the contact first");
-        System.out.println("enter the house number: ");
-        int houseNumber = scn.nextInt();
-        System.out.println("enter the street name: ");
-        String streetName = scn.next();
-        System.out.println("enter the city: ");
-        String city = scn.next();
-        System.out.println("enter the state: ");
-        String state = scn.next();
-        System.out.println("enter the zip code: ");
-        int zipCode = scn.nextInt();
+        System.out.println("Add the contact using this format: John Willard Doe, 324 Main St, St Charles, MO,63303, 8475390126");
+        String contact = scn.nextLine();
+        String[] parts = contact.split(", ");
+        String[] nameParts = parts[0].split(" ");
+        String firstName = nameParts[0];
+        String lastName = nameParts[nameParts.length - 1];
+        String middleName = parts[0].substring(firstName.length() + 1, parts[0].length() - lastName.length() - 1);
+        int houseNumber = Integer.parseInt(parts[1].split(" ")[0]);
+        String streetName = parts[1].substring(parts[1].indexOf(" ") + 1);
+        String city = parts[2];
+        String state = parts[3];
+        int zipCode = Integer.parseInt(parts[4]);
+        long phoneNumber = Long.parseLong(parts[5]);
+       
         Address address = new Address(houseNumber, streetName, city, state, zipCode);
-        System.out.println("Enter first name: ");
-        String firstName = scn.next();
-        System.out.println("Enter last name: ");
-        String lastName = scn.next();
-        System.out.println("Enter phone number: ");
-        long phoneNumber = scn.nextLong();
-        Person person = new Person(firstName, lastName, address, phoneNumber);   
+        Person person = new Person(firstName, middleName, lastName, address, phoneNumber);   
         contacts.add(person);
         sortPerson(contacts);  
     }
@@ -137,7 +137,10 @@ public class PhoneBook{
     public Person searchList()
     {   Person noPerson = null;
         for(Person person : contacts)
-        {   long phoneNumber = scn.nextLong();
+        {   String phoneNumber = scn.next();
+            if(phoneNumber.length() == 10){
+                phoneNumber = "("+phoneNumber.substring(0, 3) + ")" + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6, 10);
+            }    
             if(person.getPhoneNumber().equals(phoneNumber))
             {
                 System.out.println("*************************************************************");
@@ -150,7 +153,10 @@ public class PhoneBook{
     {
         System.out.println("To update a contact you must enter the persons phone number ");        
         System.out.println("Enter phone number: ");
-        long phoneNumber = scn.nextLong();
+        String phoneNumber = scn.next();
+        if(phoneNumber.length() == 10){
+            phoneNumber = "("+phoneNumber.substring(0, 3) + ")" + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6, 10);
+        }    
         for(Person person : contacts)
         {
             if(person.getPhoneNumber().equals(phoneNumber))
@@ -172,11 +178,13 @@ public class PhoneBook{
                 Address address = new Address(houseNumber, streetName, city, state, zipCode);
                 System.out.println("Enter new first name: ");
                 String firstName = scn.next();
+                System.out.println("Enter new middle name: ");
+                String middleName = scn.next();
                 System.out.println("Enter new last name: ");
                 String lastName = scn.next();
                 System.out.println("Enter new phone number: ");
                 long newPhoneNumber = scn.nextLong();
-                Person newPerson = new Person(firstName, lastName, address, newPhoneNumber);                 
+                Person newPerson = new Person(firstName, middleName, lastName, address, newPhoneNumber);                 
                 contacts.set(contacts.indexOf(person), newPerson);
                 sortPerson(contacts);
             }
